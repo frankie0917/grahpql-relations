@@ -21,4 +21,15 @@
   padding: 5px 20px;
   background: rgb(55, 113, 179);
   color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.f-tb {
+  padding-top: 10px;
+}
+
+.f-tb > *:first-child,
+.f-db > *:first-child {
+  margin-right: 10px;
 }

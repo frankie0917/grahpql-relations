@@ -1,8 +1,10 @@
 import { observer } from 'mobx-react';
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useStore } from '../store';
 import { setTransferData } from '../utils/dataTransfer';
 import { px2num } from '../utils/px2num';
+import { ReactComponent as DBIcon } from '../icon/Database.svg';
+import { ReactComponent as TBIcon } from '../icon/Table.svg';
 import './NodeItem.css';
 
 interface Props {
@@ -34,7 +36,7 @@ export const NodeItem = observer(({ id }: Props) => {
     });
   }, []);
 
-  const { db, tb } = node.data;
+  const { db, tb, dbColor } = node.data;
   return (
     <div
       className="node"
@@ -50,8 +52,14 @@ export const NodeItem = observer(({ id }: Props) => {
         });
       }}
     >
-      <div className="f-db">{db}</div>
-      <div className="f-tb">{tb}</div>
+      <div className="f-db" style={{ backgroundColor: dbColor }}>
+        <DBIcon />
+        {db}
+      </div>
+      <div className="f-tb">
+        <TBIcon fill={dbColor} />
+        {tb}
+      </div>
     </div>
   );
 });

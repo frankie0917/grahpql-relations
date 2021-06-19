@@ -11,16 +11,38 @@ function App() {
   const { nodeGraph } = useStore();
 
   useEffect(() => {
+    const dbMap: Record<string, string> = {};
+
+    let colors = [
+      '#7CB43C',
+      '#3787A4',
+      '#A85F38',
+      '#BD6ACD',
+      '#602E8A',
+      '#862D2D',
+    ];
+    let colorIndex = 0;
     data.forEach((r) => {
       const { from_database, from_table, to_database, to_table, path } = r;
       const fId = `${from_database}-${from_table}`;
       const tId = `${to_database}-${to_table}`;
       const [fKey, tKey] = path.split(':');
+      if (!dbMap[from_database]) {
+        colorIndex++;
+        dbMap[from_database] = colors[colorIndex];
+      }
+
+      if (!dbMap[to_database]) {
+        colorIndex++;
+        dbMap[to_database] = colors[colorIndex];
+      }
+
       if (!nodeGraph.hasNode(fId)) {
         nodeGraph.addNode(fId, {
           db: from_database,
           tb: from_table,
           connKey: fKey,
+          dbColor: dbMap[from_database],
         });
       }
       if (!nodeGraph.hasNode(tId)) {
@@ -28,6 +50,7 @@ function App() {
           db: to_database,
           tb: to_table,
           connKey: tKey,
+          dbColor: dbMap[to_database],
         });
       }
 
