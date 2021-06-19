@@ -41,7 +41,7 @@ export const NodeItem = ({
     observer.observe(elRef.current, {
       attributeFilter: ['style'],
     });
-  }, [elRef.current]);
+  }, []);
   return (
     <div
       className="node"
