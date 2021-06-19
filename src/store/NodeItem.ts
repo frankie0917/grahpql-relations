@@ -1,11 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 import { Relation } from '../typings/Relation';
 
+export type NodeItemData = { db: string; tb: string; connKey: string };
 export class NodeItem {
   constructor(
     public id: string,
     public pos = { x: 0, y: 0 },
-    public data: Relation,
+    public data: NodeItemData,
     private _w: number | null = null,
     private _h: number | null = null,
   ) {

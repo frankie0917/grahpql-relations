@@ -25,7 +25,7 @@ export const NodeGraph = observer(() => {
         }}
       >
         {Object.entries(nodeStore.nodes).map(([id]) => {
-          return <NodeItem id={id} />;
+          return <NodeItem id={id} key={id} />;
         })}
       </div>
       <svg
@@ -37,7 +37,10 @@ export const NodeGraph = observer(() => {
         {nodeStore.connData.map(({ from, to }) => {
           const id = `C-${from}-${to}`;
 
-          const [f, t] = [nodeStore.nodes[from], nodeStore.nodes[to]];
+          const [f, t] = [
+            nodeStore.nodes[`N-${from}`],
+            nodeStore.nodes[`N-${to}`],
+          ];
           const d: string[] = [
             // Move
             `M ${f.pos.x + f.w / 2} ${f.pos.y + f.h / 2}`,

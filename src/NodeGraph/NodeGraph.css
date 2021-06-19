@@ -12,14 +12,3 @@
   z-index: 10;
   background-color: transparent;
 }
-
-.node {
-  width: fit-content;
-  height: fit-content;
-  padding: 10px 20px;
-  border: 1px solid #444;
-  background: #fff;
-  border-radius: 5px;
-  cursor: grab;
-  position: absolute;
-}

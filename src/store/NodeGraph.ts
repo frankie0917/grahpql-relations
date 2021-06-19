@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { Conn } from '../typings/Conn';
 import { Relation } from '../typings/Relation';
-import { NodeItem } from './NodeItem';
+import { NodeItem, NodeItemData } from './NodeItem';
 
 export class NodeGraph {
   constructor() {
@@ -11,12 +11,17 @@ export class NodeGraph {
   nodes: Record<string, NodeItem> = {};
   connData: Conn[] = [];
 
-  addNode(id: string, data: Relation, x = 0, y = 0) {
+  addNode(id: string, data: NodeItemData, x = 0, y = 0) {
     const nId = `N-${id}`;
     this.nodes[nId] = new NodeItem(nId, { x, y }, data);
   }
 
-  addConn(conn: Conn) {
-    this.connData.push({ ...conn, id: `C-${conn.from + conn.to}` });
+  hasNode(id: string) {
+    const nId = `N-${id}`;
+    return Boolean(this.nodes[nId]);
+  }
+
+  addConn(conn: Omit<Conn, 'id'>) {
+    this.connData.push({ ...conn, id: `C-${conn.from}-${conn.to}` });
   }
 }

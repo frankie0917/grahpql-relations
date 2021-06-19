@@ -1,13 +1,15 @@
+import { observer } from 'mobx-react';
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useStore } from '../store';
 import { setTransferData } from '../utils/dataTransfer';
 import { px2num } from '../utils/px2num';
+import './NodeItem.css';
 
 interface Props {
   id: string;
 }
 
-export const NodeItem = ({ id, children }: PropsWithChildren<Props>) => {
+export const NodeItem = observer(({ id }: Props) => {
   const elRef = useRef<HTMLDivElement>(null);
   const { nodeGraph } = useStore();
   const node = nodeGraph.nodes[id];
@@ -31,6 +33,8 @@ export const NodeItem = ({ id, children }: PropsWithChildren<Props>) => {
       attributeFilter: ['style'],
     });
   }, []);
+
+  const { db, tb } = node.data;
   return (
     <div
       className="node"
@@ -46,7 +50,8 @@ export const NodeItem = ({ id, children }: PropsWithChildren<Props>) => {
         });
       }}
     >
-      {children}
+      <div className="f-db">{db}</div>
+      <div className="f-tb">{tb}</div>
     </div>
   );
-};
+});
