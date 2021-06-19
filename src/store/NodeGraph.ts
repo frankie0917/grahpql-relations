@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { Conn } from '../typings/Conn';
 import { Relation } from '../typings/Relation';
 import { NodeItem, NodeItemData } from './NodeItem';
+import { Vector } from './Vector';
 
 export class NodeGraph {
   constructor() {
@@ -13,7 +14,7 @@ export class NodeGraph {
 
   addNode(id: string, data: NodeItemData, x = 0, y = 0) {
     const nId = `N-${id}`;
-    this.nodes[nId] = new NodeItem(nId, { x, y }, data);
+    this.nodes[nId] = new NodeItem(nId, new Vector(x, y), data);
   }
 
   hasNode(id: string) {

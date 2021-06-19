@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Relation } from '../typings/Relation';
+import { Vector } from './Vector';
 
 export type NodeItemData = {
   db: string;
@@ -10,7 +10,7 @@ export type NodeItemData = {
 export class NodeItem {
   constructor(
     public id: string,
-    public pos = { x: 0, y: 0 },
+    public pos = new Vector(0, 0),
     public data: NodeItemData,
     private _w: number | null = null,
     private _h: number | null = null,
