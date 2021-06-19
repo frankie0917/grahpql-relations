@@ -1,0 +1,106 @@
+[
+  {
+    "from_database": "rv-p-core",
+    "from_table": "reviews",
+    "to_database": "accounts-prod-businesses",
+    "to_table": "organizations",
+    "path": "organization_id:organization_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "rv-p-core",
+    "from_table": "reviews",
+    "to_database": "cn-p-core",
+    "to_table": "orders",
+    "path": "order_id:order_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "rv-p-core",
+    "from_table": "reviews",
+    "to_database": "rv-p-core",
+    "to_table": "organizations",
+    "path": "organization_id:organization_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "rv-p-core",
+    "from_table": "reviews",
+    "to_database": "cn-p-core",
+    "to_table": "products",
+    "path": "product_id:product_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "accounts-prod-businesses",
+    "from_table": "organizations",
+    "to_database": "accounts-prod-businesses",
+    "to_table": "memberships",
+    "path": "organization_id:organization_id",
+    "1-N?": true
+  },
+  {
+    "from_database": "accounts-prod-businesses",
+    "from_table": "organizations",
+    "to_database": "cn-p-core",
+    "to_table": "app_connections",
+    "path": "organization_id:organization_id",
+    "1-N?": true
+  },
+  {
+    "from_database": "accounts-prod-businesses",
+    "from_table": "memberships",
+    "to_database": "accounts-prod-businesses",
+    "to_table": "accounts",
+    "path": "account_id:account_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "accounts-prod-businesses",
+    "from_table": "memberships",
+    "to_database": "accounts-prod-businesses",
+    "to_table": "roles",
+    "path": "role_id:role_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "returnscenter-production",
+    "from_table": "returns",
+    "to_database": "returnscenter-production",
+    "to_table": "shops",
+    "path": "shop_id:id",
+    "1-N?": false
+  },
+  {
+    "from_database": "returnscenter-production",
+    "from_table": "shops",
+    "to_database": "accounts-prod-businesses",
+    "to_table": "organizations",
+    "path": "user_uuid:organization_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "cn-p-core",
+    "from_table": "app_connections",
+    "to_database": "accounts-prod-businesses",
+    "to_table": "organizations",
+    "path": "organization_id:organization_id",
+    "1-N?": false
+  },
+  {
+    "from_database": "cn-p-core",
+    "from_table": "products",
+    "to_database": "rv-p-core",
+    "to_table": "reviews",
+    "path": "product_id:product_id",
+    "1-N?": true
+  },
+  {
+    "from_database": "cn-p-core",
+    "from_table": "orders",
+    "to_database": "rv-p-core",
+    "to_table": "reviews",
+    "path": "order_id:order_id",
+    "1-N?": true
+  }
+]

@@ -5,29 +5,18 @@ import { px2num } from '../utils/px2num';
 
 interface Props {
   id: string;
-  top?: number;
-  left?: number;
 }
 
-export const NodeItem = ({
-  id,
-  children,
-  left = 0,
-  top = 0,
-}: PropsWithChildren<Props>) => {
+export const NodeItem = ({ id, children }: PropsWithChildren<Props>) => {
   const elRef = useRef<HTMLDivElement>(null);
   const { nodeGraph } = useStore();
+  const node = nodeGraph.nodes[id];
 
   const updateDimesion = () => {
     if (!elRef.current) return;
-    console.log('update', id);
-    nodeGraph.nodes[id].w = px2num(
-      window.getComputedStyle(elRef.current).width,
-    );
+    node.w = px2num(window.getComputedStyle(elRef.current).width);
 
-    nodeGraph.nodes[id].h = px2num(
-      window.getComputedStyle(elRef.current).height,
-    );
+    node.h = px2num(window.getComputedStyle(elRef.current).height);
   };
 
   useEffect(() => {
@@ -48,12 +37,12 @@ export const NodeItem = ({
       id={id}
       draggable
       ref={elRef}
-      style={{ left, top }}
+      style={{ left: node.pos.x, top: node.pos.y }}
       onDragStart={(e) => {
         setTransferData(e, {
           id,
-          left: left - e.clientX,
-          top: top - e.clientY,
+          left: node.pos.x - e.clientX,
+          top: node.pos.y - e.clientY,
         });
       }}
     >

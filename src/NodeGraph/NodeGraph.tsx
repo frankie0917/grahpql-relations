@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { NodeItem } from '../NodeItem/NodeItem';
 import { useStore } from '../store';
 import { getTransferData } from '../utils/dataTransfer';
@@ -8,13 +8,6 @@ import './NodeGraph.css';
 
 export const NodeGraph = observer(() => {
   const nodeStore = useStore().nodeGraph;
-  useEffect(() => {
-    ['1', '2', '3'].forEach((id, i) => {
-      nodeStore.addNode(`N-${id}`, i * 100 + 100, 100);
-    });
-
-    nodeStore.addConn({ from: 'N-1', to: 'N-2' });
-  }, []);
 
   return (
     <div className="node-graph-container">
@@ -31,20 +24,9 @@ export const NodeGraph = observer(() => {
           nodeStore.nodes[id].setY(top + e.clientY);
         }}
       >
-        {Object.entries(nodeStore.nodes).map(
-          ([
-            id,
-            {
-              pos: { x, y },
-            },
-          ]) => {
-            return (
-              <NodeItem id={id} key={id} left={x} top={y}>
-                {id}
-              </NodeItem>
-            );
-          },
-        )}
+        {Object.entries(nodeStore.nodes).map(([id]) => {
+          return <NodeItem id={id} />;
+        })}
       </div>
       <svg
         width="100%"
