@@ -8,6 +8,8 @@ export type NodeItemData = {
   dbColor: string;
 };
 export class NodeItem {
+  vel: Vector;
+  acc: Vector;
   constructor(
     public id: string,
     public pos = new Vector(0, 0),
@@ -15,6 +17,8 @@ export class NodeItem {
     private _w: number | null = null,
     private _h: number | null = null,
   ) {
+    this.vel = new Vector(0, 0);
+    this.acc = new Vector(0, 0);
     makeAutoObservable(this);
   }
 

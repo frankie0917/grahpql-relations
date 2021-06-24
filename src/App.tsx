@@ -22,6 +22,9 @@ function App() {
       '#862D2D',
     ];
     let colorIndex = 0;
+
+    const midW = window.innerWidth / 2;
+    const midH = window.innerHeight / 2;
     data.forEach((r) => {
       const { from_database, from_table, to_database, to_table, path } = r;
       const fId = `${from_database}-${from_table}`;
@@ -38,20 +41,30 @@ function App() {
       }
 
       if (!nodeGraph.hasNode(fId)) {
-        nodeGraph.addNode(fId, {
-          db: from_database,
-          tb: from_table,
-          connKey: fKey,
-          dbColor: dbMap[from_database],
-        });
+        nodeGraph.addNode(
+          fId,
+          {
+            db: from_database,
+            tb: from_table,
+            connKey: fKey,
+            dbColor: dbMap[from_database],
+          },
+          midW,
+          midH,
+        );
       }
       if (!nodeGraph.hasNode(tId)) {
-        nodeGraph.addNode(tId, {
-          db: to_database,
-          tb: to_table,
-          connKey: tKey,
-          dbColor: dbMap[to_database],
-        });
+        nodeGraph.addNode(
+          tId,
+          {
+            db: to_database,
+            tb: to_table,
+            connKey: tKey,
+            dbColor: dbMap[to_database],
+          },
+          midW,
+          midH,
+        );
       }
 
       nodeGraph.addConn({ from: fId, to: tId });

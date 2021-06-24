@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NodeItem } from '../NodeItem/NodeItem';
 import { useStore } from '../store';
 import { getTransferData } from '../utils/dataTransfer';
@@ -8,7 +8,14 @@ import './NodeGraph.css';
 
 export const NodeGraph = observer(() => {
   const nodeStore = useStore().nodeGraph;
+  // useEffect(() => {
+  //   const mainAnimation = () => {
 
+  //     requestAnimationFrame(mainAnimation);
+  //   };
+
+  //   mainAnimation();
+  // }, []);
   return (
     <div className="node-graph-container">
       <div
@@ -43,8 +50,8 @@ export const NodeGraph = observer(() => {
           ];
           const d: string[] = [
             // Move
-            `M ${f.pos.x + f.w / 2} ${f.pos.y + f.h / 2}`,
-            `L ${t.pos.x + t.w / 2} ${t.pos.y + t.h / 2}`,
+            `M ${f.pos.x} ${f.pos.y}`,
+            `L ${t.pos.x} ${t.pos.y}`,
             `Z`,
           ];
           return (

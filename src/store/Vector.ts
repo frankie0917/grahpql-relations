@@ -1,9 +1,12 @@
-import { makeAutoObservable, makeObservable } from 'mobx';
+import { makeAutoObservable, makeObservable, observable } from 'mobx';
 import Victor from 'victor';
 
 export class Vector extends Victor {
   constructor(x: number, y: number) {
     super(x, y);
-    makeObservable(this, {});
+    makeObservable(this, {
+      x: observable,
+      y: observable,
+    });
   }
 }

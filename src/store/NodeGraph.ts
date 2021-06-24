@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx';
 import { Conn } from '../typings/Conn';
-import { Relation } from '../typings/Relation';
 import { NodeItem, NodeItemData } from './NodeItem';
 import { Vector } from './Vector';
 
