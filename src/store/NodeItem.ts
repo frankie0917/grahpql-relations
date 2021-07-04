@@ -14,27 +14,12 @@ export class NodeItem {
     public id: string,
     public pos = new Vector(0, 0),
     public data: NodeItemData,
-    private _w: number | null = null,
-    private _h: number | null = null,
+    public w: number | null = null,
+    public h: number | null = null,
   ) {
     this.vel = new Vector(0, 0);
     this.acc = new Vector(0, 0);
     makeAutoObservable(this);
-  }
-
-  get w(): number {
-    return this._w || 0;
-  }
-  set w(w: number | null) {
-    this._w = w;
-  }
-
-  get h(): number {
-    return this._h || 0;
-  }
-
-  set h(h: number | null) {
-    this._h = h;
   }
 
   setX(x: number) {
