@@ -28,6 +28,8 @@
 
 .f-tb {
   padding-top: 10px;
+  align-items: center;
+  display: flex;
 }
 
 .f-tb > *:first-child,
