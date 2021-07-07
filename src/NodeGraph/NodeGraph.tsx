@@ -2,6 +2,7 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React, { useEffect, useMemo } from 'react';
 import { Edge } from '../Edge/Edge';
+import { EdgeMsg } from '../EdgeMsg/EdgeMsg';
 import { NodeItem } from '../NodeItem/NodeItem';
 import { useStore } from '../store';
 import { getTransferData } from '../utils/dataTransfer';
@@ -27,6 +28,11 @@ export const NodeGraph = observer(() => {
           top: 50,
         }}
       >
+        <div>
+          {edges.map((e, i) => (
+            <EdgeMsg key={i} e={e} />
+          ))}
+        </div>
         <div
           onDragOver={(e) => {
             e.preventDefault();
@@ -42,6 +48,7 @@ export const NodeGraph = observer(() => {
             return <NodeItem id={id} key={id} />;
           })}
         </div>
+
         <svg width="100%" height="100%">
           {edges.map((e, i) => (
             <Edge key={i} e={e} />

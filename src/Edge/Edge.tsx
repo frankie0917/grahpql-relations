@@ -12,6 +12,12 @@ export const Edge = observer(({ e }: { e: EdgeT }) => {
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#cubic_b%C3%A9zier_curve
     // TODO: investigate better curve
     const p = points;
+    // return [
+    //   `M ${p[0].x} ${p[0].y}`,
+    //   // draw
+    //   `L ${p[p.length - 1].x} ${p[p.length - 1].y}`,
+    // ];
+
     const M = [`M ${p[0].x} ${p[0].y}`];
 
     const C = (i: number, s = true) => {
@@ -51,6 +57,12 @@ export const Edge = observer(({ e }: { e: EdgeT }) => {
       fill="transparent"
       strokeWidth={2}
       stroke="#444"
+      onMouseEnter={() => {
+        nodeStore.setActiveEdge(`${e.v}-${e.w}`);
+      }}
+      onMouseLeave={() => {
+        nodeStore.setActiveEdge(null);
+      }}
     ></path>
   );
 });

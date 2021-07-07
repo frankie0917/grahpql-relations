@@ -2,6 +2,8 @@ import { makeAutoObservable, toJS } from 'mobx';
 import { NodeItemData } from './NodeItem';
 import dagre from 'dagre';
 
+export type EdgeData = { fId: string; tId: string; fKey: string; tKey: string };
+
 export class NodeGraph {
   public g: dagre.graphlib.Graph<{}>;
   public nodeDataMap: Record<
@@ -13,6 +15,8 @@ export class NodeGraph {
       rendered: boolean;
     }
   > = {};
+  public activeEdge: string | null = null;
+  public edgeDataMap: Record<string, EdgeData> = {};
 
   renderedList: string[] = [];
 
@@ -51,7 +55,21 @@ export class NodeGraph {
     return Boolean(this.nodeDataMap[id]);
   }
 
-  addEdge(fId: string, tId: string) {
-    this.g.setEdge(fId, tId);
+  hasEdge(id: string) {
+    return Boolean(this.edgeDataMap[id]);
   }
+
+  addEdge(e: EdgeData) {
+    const id = `${e.fId}-${e.tId}`;
+    if (this.hasEdge(id)) return;
+    this.edgeDataMap[id] = e;
+    this.g.setEdge(e.fId, e.tId);
+  }
+
+  setActiveEdge = (id: string | null) => {
+    if (id === null) return (this.activeEdge = id);
+
+    if (!this.hasEdge(id)) return;
+    this.activeEdge = id;
+  };
 }

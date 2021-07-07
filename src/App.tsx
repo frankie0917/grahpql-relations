@@ -6,6 +6,7 @@ import { Relation } from './typings/Relation';
 import { observer } from 'mobx-react';
 import dagre from 'dagre';
 import { toJS } from 'mobx';
+import { EdgeData } from './store/NodeGraph';
 
 const data = mockData as Relation[];
 // const data: Relation[] = [
@@ -29,7 +30,7 @@ const data = mockData as Relation[];
 
 function App() {
   const { nodeGraph } = useStore();
-  const edges = useRef<[string, string][]>([]);
+  const edges = useRef<EdgeData[]>([]);
 
   useEffect(() => {
     const dbMap: Record<string, string> = {};
@@ -76,7 +77,12 @@ function App() {
         });
       }
 
-      edges.current.push([fId, tId]);
+      edges.current.push({
+        fId,
+        tId,
+        fKey,
+        tKey,
+      });
     });
   }, []);
 
@@ -86,7 +92,7 @@ function App() {
       nodeGraph.renderedList.length
     ) {
       edges.current.forEach((e) => {
-        nodeGraph.addEdge(...e);
+        nodeGraph.addEdge(e);
       });
       dagre.layout(nodeGraph.g);
     }
